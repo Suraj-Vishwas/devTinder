@@ -37,4 +37,11 @@
 - Multiple Route Handlers - Play with the code
 - next()
 - next function and errors along with res.send()
-- app.use("/route", rH, [rH2, rH3], rH4, rH5);
+- app.use("/route", rH, [rH2, rH3], rH4, rH5);/
+
+
+- What is middleware
+- How express.js basically handles the requests behind the scenes 
+- Difference between app.use vs app.all 
+- Write a dummy middleware for admin
+- Write a dummy middleware for user routes, except /user/login
