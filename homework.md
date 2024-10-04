@@ -21,3 +21,20 @@
 
 - Play with routes and route extensions ex. /hello, /, /hello/3, /xyz
 - Order of the routes matter a lot
+
+
+ 
+- Install postman app and make a workspace/collection > test API call
+- write logic to handle GET,POST,DELETE,PATCH PAI calls and test them on Postman
+
+
+- Explore routing and use of ?, +, *, () in the routes
+- Use of regex in routes /a/ , /.*fly$/
+- Reading the query params in the routes
+- Reading the dynamic routes
+
+
+- Multiple Route Handlers - Play with the code
+- next()
+- next function and errors along with res.send()
+- app.use("/route", rH, [rH2, rH3], rH4, rH5);
