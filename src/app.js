@@ -1,49 +1,29 @@
 const express = require("express");
 const app = express();
-const {adminAuth, userAuth} = require("./middlewares/auth")
 
-// handle Auth Middleware for all GET,POST,....requests
-
-app.use("/admin", adminAuth);
-// app.use("/user", userAuth);
-
-app.get("/user/login", (req,res) => {
-    res.send("User logged successfully");
+// orders matters you cann't write (next,req,res,err)
+app.use("/", (err, req, res, next) => {
+    if(err){
+    // log your error 
+        res.status(500).send("Something went wrong");
+    }
 })
-
-app.get("/user", userAuth, (req,res) => {
-    res.send("User data get successfully");
+app.get("/getUserData", (req,res) => {
+    try{
+        // logic of DB call and get user data
+        throw new Error("akjfn");
+        res.send("User data sent")
+    }catch(err){
+        res.status(500).send("some error contact support team!");
+    }
+    // throw new Error("akjfn");
+    // res.send("User data sent")
 })
-app.get("/admin/getAllData", (req,res) => {
-    res.send("admin get all the data successfully");
-    // console.log("done");
-    
+app.use("/", (err,req,res, next) => {
+    if(err){
+        res.status(500).send("Something went wrong");
+    }
 })
-app.get("/admin/deleteData", (req,res) => {
-    res.send("deleted data successfully");
-})
-
-
-
-
-
-
-
-// request handler
-
-// app.use("/route", rH, [rH2, rH3], rH4, rH5);
-
-// app.get("/user", (req, res, next) => {
-//         console.log("Handling the route handler 1");
-//         res.send("1st Response!")
-//         // next();
-//     });
-// app.get("/user", (req, res, next) => {
-//         console.log("Handling the route handler 2");
-//         res.send("2nd Response!")
-//         next();
-//     });
-
 app.listen(4000, ()=>{
     console.log("Server is successfully listening on port 4000"); 
 })
