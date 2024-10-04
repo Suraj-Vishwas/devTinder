@@ -1,30 +1,35 @@
 const express = require("express");
+const {connectDB} = require("./config/database")
 const app = express();
+const User = require("./models/user");
+const { Mongoose } = require("mongoose");
+const user = require("./models/user");
 
-// orders matters you cann't write (next,req,res,err)
-app.use("/", (err, req, res, next) => {
-    if(err){
-    // log your error 
-        res.status(500).send("Something went wrong");
-    }
-})
-app.get("/getUserData", (req,res) => {
+app.post("/signup", async (req, res) => {
+    const user = new User({
+        firstName: "Suraj",
+        lastName: "Vishwas",
+        emailId: "sunshineknight365@gmail.com",
+        password: "ABZ",
+    })
     try{
-        // logic of DB call and get user data
-        throw new Error("akjfn");
-        res.send("User data sent")
+        await user.save();
+        res.send("User Created Successfully");
     }catch(err){
-        res.status(500).send("some error contact support team!");
-    }
-    // throw new Error("akjfn");
-    // res.send("User data sent")
+        res.status(400).send("Error saving the user", err.massage)}
+    // creating a new instance of the user model
+    // const user = new User(userObj);
+
+
+
 })
-app.use("/", (err,req,res, next) => {
-    if(err){
-        res.status(500).send("Something went wrong");
-    }
-})
-app.listen(4000, ()=>{
-    console.log("Server is successfully listening on port 4000"); 
-})
-;
+
+
+
+connectDB()
+    .then(() => {
+        console.log('MongoDB connected...');
+        app.listen(7777, ()=>{
+            console.log("Server is successfully listening on port 7777"); 
+        });
+    }).catch((err) => console.error("Database cann't be connected"));
